@@ -55,7 +55,7 @@ body {
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px) and (min-width: 400px) {
   .container .position-box .box-left-content .circle {
     margin-top: -70px;
     width: 70px;
@@ -160,7 +160,7 @@ body {
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px) and (min-width: 400px) {
   .container .position-box .seperator {
     display: block;
   }
@@ -208,7 +208,7 @@ body {
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px) and (min-width: 400px) {
   .container .position-box .box-right-content {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
@@ -225,7 +225,7 @@ body {
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px) and (min-width: 400px) {
   .container .position-box {
     padding: 30px 20px;
     margin: 60px 0px;
