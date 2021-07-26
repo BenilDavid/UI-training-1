@@ -1,18 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 $background: #f0fafb;
 $headerBackground: #64babb;
 
 body {
+	font-family: 'spartan';
 	background: $background;
 }
 .header {
 	height: 150px;
 	width: 100%;
-	background-color: $headerBackground;
+	background: url(images/bg-header-desktop.svg);
+	background-color: #5da5a4;
 }
 
 .container {
-	.position-box {
+	.position-box:nth-child(1),
+	.position-box:nth-child(2) {
 		border-left: 4px solid $headerBackground;
+	}
+	.position-box {
 		border-radius: 5px;
 		margin: 20px 0px;
 		padding: 0px 40px;
@@ -20,97 +27,133 @@ body {
 		height: 160px;
 		background: white;
 		box-shadow: 1px 3px 20px 2px #d9edee;
-	}
-	.box-left-content {
-		display: grid;
-		align-items: center;
-		justify-content: right;
-		.circle {
-			width: 80px;
-			height: 80px;
-			background-color: #555;
-			clip-path: circle(50%);
+		.box-left-content {
+			display: grid;
+			align-items: center;
+			// justify-content: center;
+			.circle {
+				width: 80px;
+				height: 80px;
+			}
+			@media (max-width: 400px) {
+				.circle {
+					margin-top: -40px;
+					width: 50px;
+					height: 50px;
+				}
+			}
 		}
-	}
-	.box-middle-content {
-		display: grid;
-		align-self: center;
-		font-size: 14px;
-		.top-content {
-			display: flex;
+		@media (max-width: 400px) {
+			.box-left-content {
+				display: block;
+			}
+		}
+		.box-middle-content {
+			display: grid;
+			align-self: center;
+			font-size: 14px;
+			.top-content {
+				display: flex;
 
-			.top-name,
-			.top-new,
-			.top-featured {
-				margin: 10px 4px;
+				.top-name,
+				.top-new,
+				.top-featured {
+					margin: 10px 4px;
+				}
+				.top-name {
+					color: $headerBackground;
+					font-weight: 700;
+				}
+				.top-new {
+					font-size: 12px;
+					font-weight: 600;
+					background-color: $headerBackground;
+					color: white;
+					margin: auto 5px;
+					padding: 5px 12px;
+					border-radius: 30px;
+				}
+				.top-featured {
+					font-size: 12px;
+					font-weight: 600;
+					background-color: black;
+					color: white;
+					margin: auto 5px;
+					padding: 5px 12px;
+					border-radius: 30px;
+				}
 			}
-			.top-name {
-				color: $headerBackground;
-				font-weight: 500;
+			.middle-content {
+				.position {
+					font-size: 18px;
+					font-weight: 700;
+				}
 			}
-			.top-new {
-				font-size: 12px;
-				background-color: $headerBackground;
-				color: white;
-				margin: auto 5px;
-				padding: 0px 12px;
-				text-align: center;
-				border-radius: 30px;
-				font-weight: 500;
-			}
-			.top-featured {
-				font-size: 12px;
-				background-color: black;
-				color: white;
-				margin: auto 5px;
-				font-weight: 500;
-				padding: 0px 12px;
-				text-align: center;
-				border-radius: 30px;
+			.bottom-content {
+				font-size: 15px;
+				color: #bbb;
+				.point-divider {
+					height: 3px;
+					width: 3px;
+					background-color: #bbb;
+					border-radius: 50%;
+					display: inline-block;
+					vertical-align: middle;
+				}
+				.days {
+					margin: 0px 5px;
+				}
+				.location {
+					margin: 0px 5px;
+				}
+				.work-time {
+					padding: 0px 5px;
+					margin: 0px 5px;
+				}
 			}
 		}
-		.bottom-content {
-			font-size: 15px;
-			color: #bbb;
-			.point-divider {
-				height: 3px;
-				width: 3px;
-				background-color: #bbb;
-				border-radius: 50%;
-				display: inline-block;
-				vertical-align: middle;
+		.seperator {
+			display: none;
+			margin: 20px auto;
+			width: 90%;
+			height: 1px;
+			background-color: #bbb;
+		}
+		@media (max-width: 400px) {
+			.seperator {
+				display: block;
 			}
-			.days {
-				margin: 0px 5px;
+		}
+		.box-right-content {
+			display: grid;
+			align-items: center;
+			justify-content: right;
+			.skills {
+				display: flex;
+				flex-wrap: wrap;
+				font-weight: 600;
 			}
-			.location {
-				margin: 0px 5px;
+			.skill {
+				width: max-content;
+				margin: 10px 10px;
+				padding: 5px 10px;
+				background-color: $background;
+				color: $headerBackground;
+				border-radius: 5px;
 			}
-			.work-time {
-				padding: 0px 5px;
-				margin: 0px 5px;
+			.skill:hover {
+				color: white;
+				background-color: $headerBackground;
+				cursor: pointer;
 			}
 		}
 	}
-	.box-right-content {
-		display: grid;
-		align-items: center;
-		justify-content: right;
-		.skills {
-			display: flex;
-		}
-		.skill {
-			width: max-content;
-			margin: 0px 10px;
-			padding: 5px 10px;
-			background-color: $background;
-			color: $headerBackground;
-			border-radius: 5px;
-		}
-		.skill:hover {
-			color: white;
-			background-color: $headerBackground;
-			cursor: pointer;
+	@media (max-width: 400px) {
+		.position-box {
+			padding: 10px 5px;
+			margin: 40px 0px;
+			width: 100%;
+			height: auto;
 		}
 	}
 }
