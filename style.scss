@@ -42,12 +42,33 @@ body {
 					height: 50px;
 				}
 			}
+			@media (max-width: 1200px) {
+				.circle {
+					width: 70px;
+					height: 70px;
+				}
+			}
+			@media (max-width: 992px) {
+				.circle {
+					margin-top: -70px;
+					width: 70px;
+					height: 70px;
+				}
+			}
 		}
 		@media (max-width: 400px) {
 			.box-left-content {
 				display: block;
 			}
 		}
+		//     	@media (max-width: 1200px) {
+		// 	.position-box {
+		// 		padding: 30px 20px;
+		// 		margin: 20px 0px;
+		// 		width: 100%;
+		// 		height: auto;
+		// 	}
+		// }
 		.box-middle-content {
 			display: grid;
 			align-self: center;
@@ -124,28 +145,60 @@ body {
 				display: block;
 			}
 		}
+		@media (max-width: 992px) {
+			.seperator {
+				display: block;
+			}
+		}
 		.box-right-content {
 			display: grid;
 			align-items: center;
 			justify-content: right;
 			.skills {
 				display: flex;
-				flex-wrap: wrap;
 				font-weight: 600;
+				.skill {
+					width: max-content;
+					margin: 10px 10px;
+					padding: 5px 10px;
+					background-color: $background;
+					color: $headerBackground;
+					border-radius: 5px;
+				}
+				.skill:hover {
+					color: white;
+					background-color: $headerBackground;
+					cursor: pointer;
+				}
 			}
-			.skill {
-				width: max-content;
-				margin: 10px 10px;
-				padding: 5px 10px;
-				background-color: $background;
-				color: $headerBackground;
-				border-radius: 5px;
+			@media (max-width: 992px) {
+				.skills {
+					flex-wrap: wrap;
+				}
 			}
-			.skill:hover {
-				color: white;
-				background-color: $headerBackground;
-				cursor: pointer;
+		}
+		@media (max-width: 992px) {
+			.box-right-content {
+				justify-content: center;
 			}
+		}
+	}
+
+	@media (max-width: 1200px) {
+		.position-box {
+			padding: 30px 20px;
+			margin: 20px 0px;
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	@media (max-width: 992px) {
+		.position-box {
+			padding: 30px 20px;
+			margin: 60px 0px;
+			width: 100%;
+			height: auto;
 		}
 	}
 	@media (max-width: 400px) {
