@@ -1,0 +1,149 @@
+body {
+  background: #f0fafb;
+}
+
+.header {
+  height: 150px;
+  width: 100%;
+  background-color: #64babb;
+}
+
+.container .position-box {
+  border-left: 4px solid #64babb;
+  border-radius: 5px;
+  margin: 20px 0px;
+  padding: 0px 40px;
+  width: 100%;
+  height: 160px;
+  background: white;
+  -webkit-box-shadow: 1px 3px 20px 2px #d9edee;
+          box-shadow: 1px 3px 20px 2px #d9edee;
+}
+
+.container .box-left-content {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+
+.container .box-left-content .circle {
+  width: 80px;
+  height: 80px;
+  background-color: #555;
+  -webkit-clip-path: circle(50%);
+          clip-path: circle(50%);
+}
+
+.container .box-middle-content {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 14px;
+}
+
+.container .box-middle-content .top-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .box-middle-content .top-content .top-name,
+.container .box-middle-content .top-content .top-new,
+.container .box-middle-content .top-content .top-featured {
+  margin: 10px 4px;
+}
+
+.container .box-middle-content .top-content .top-name {
+  color: #64babb;
+  font-weight: 500;
+}
+
+.container .box-middle-content .top-content .top-new {
+  font-size: 12px;
+  background-color: #64babb;
+  color: white;
+  margin: auto 5px;
+  padding: 0px 12px;
+  text-align: center;
+  border-radius: 30px;
+  font-weight: 500;
+}
+
+.container .box-middle-content .top-content .top-featured {
+  font-size: 12px;
+  background-color: black;
+  color: white;
+  margin: auto 5px;
+  font-weight: 500;
+  padding: 0px 12px;
+  text-align: center;
+  border-radius: 30px;
+}
+
+.container .box-middle-content .bottom-content {
+  font-size: 15px;
+  color: #bbb;
+}
+
+.container .box-middle-content .bottom-content .point-divider {
+  height: 3px;
+  width: 3px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.container .box-middle-content .bottom-content .days {
+  margin: 0px 5px;
+}
+
+.container .box-middle-content .bottom-content .location {
+  margin: 0px 5px;
+}
+
+.container .box-middle-content .bottom-content .work-time {
+  padding: 0px 5px;
+  margin: 0px 5px;
+}
+
+.container .box-right-content {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+
+.container .box-right-content .skills {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .box-right-content .skill {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0px 10px;
+  padding: 5px 10px;
+  background-color: #f0fafb;
+  color: #64babb;
+  border-radius: 5px;
+}
+
+.container .box-right-content .skill:hover {
+  color: white;
+  background-color: #64babb;
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */

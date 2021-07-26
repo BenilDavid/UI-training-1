@@ -1,0 +1,116 @@
+$background: #f0fafb;
+$headerBackground: #64babb;
+
+body {
+	background: $background;
+}
+.header {
+	height: 150px;
+	width: 100%;
+	background-color: $headerBackground;
+}
+
+.container {
+	.position-box {
+		border-left: 4px solid $headerBackground;
+		border-radius: 5px;
+		margin: 20px 0px;
+		padding: 0px 40px;
+		width: 100%;
+		height: 160px;
+		background: white;
+		box-shadow: 1px 3px 20px 2px #d9edee;
+	}
+	.box-left-content {
+		display: grid;
+		align-items: center;
+		justify-content: right;
+		.circle {
+			width: 80px;
+			height: 80px;
+			background-color: #555;
+			clip-path: circle(50%);
+		}
+	}
+	.box-middle-content {
+		display: grid;
+		align-self: center;
+		font-size: 14px;
+		.top-content {
+			display: flex;
+
+			.top-name,
+			.top-new,
+			.top-featured {
+				margin: 10px 4px;
+			}
+			.top-name {
+				color: $headerBackground;
+				font-weight: 500;
+			}
+			.top-new {
+				font-size: 12px;
+				background-color: $headerBackground;
+				color: white;
+				margin: auto 5px;
+				padding: 0px 12px;
+				text-align: center;
+				border-radius: 30px;
+				font-weight: 500;
+			}
+			.top-featured {
+				font-size: 12px;
+				background-color: black;
+				color: white;
+				margin: auto 5px;
+				font-weight: 500;
+				padding: 0px 12px;
+				text-align: center;
+				border-radius: 30px;
+			}
+		}
+		.bottom-content {
+			font-size: 15px;
+			color: #bbb;
+			.point-divider {
+				height: 3px;
+				width: 3px;
+				background-color: #bbb;
+				border-radius: 50%;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.days {
+				margin: 0px 5px;
+			}
+			.location {
+				margin: 0px 5px;
+			}
+			.work-time {
+				padding: 0px 5px;
+				margin: 0px 5px;
+			}
+		}
+	}
+	.box-right-content {
+		display: grid;
+		align-items: center;
+		justify-content: right;
+		.skills {
+			display: flex;
+		}
+		.skill {
+			width: max-content;
+			margin: 0px 10px;
+			padding: 5px 10px;
+			background-color: $background;
+			color: $headerBackground;
+			border-radius: 5px;
+		}
+		.skill:hover {
+			color: white;
+			background-color: $headerBackground;
+			cursor: pointer;
+		}
+	}
+}
