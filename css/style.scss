@@ -15,9 +15,53 @@ body {
 }
 
 .container {
-	.position-box:nth-child(1),
-	.position-box:nth-child(2) {
-		border-left: 4px solid $headerBackground;
+	// .position-box:nth-child(1),
+	// .position-box:nth-child(2) {
+	// 	border-left: 4px solid $headerBackground;
+	// }
+	#filter-box {
+		border-radius: 5px;
+		margin: -80px 0px 50px 0px;
+		padding: 20px 40px;
+		width: 100%;
+		height: auto;
+		background: white;
+		box-shadow: 0px 3px 10px 2px #d9edee;
+		display: none;
+		align-items: center;
+		grid-template-columns: 1fr 80px;
+
+		.tag {
+			display: inline;
+			margin: 0px 10px;
+			.content {
+				font-weight: 600;
+				color: $headerBackground;
+				background-color: $background;
+				padding: 0.2em 0.6em 0.3em;
+				border-top-left-radius: 0.25em;
+				border-bottom-left-radius: 0.25em;
+			}
+			.rm-lnk {
+				color: #fff;
+				background-color: $headerBackground;
+				border-top-right-radius: 0.25em;
+				border-bottom-right-radius: 0.25em;
+				cursor: pointer;
+				margin-left: -5px;
+				padding: 0.2em 0.3em 0.3em;
+
+				&:hover {
+					background-color: #555555;
+				}
+			}
+		}
+		.clear-filter {
+			font-weight: 600;
+			color: $headerBackground;
+			text-decoration: underline;
+			cursor: pointer;
+		}
 	}
 	.position-box {
 		border-radius: 5px;
@@ -30,7 +74,6 @@ body {
 		.box-left-content {
 			display: grid;
 			align-items: center;
-			// justify-content: center;
 			.circle {
 				width: 80px;
 				height: 80px;
@@ -56,25 +99,17 @@ body {
 				}
 			}
 		}
-		@media (max-width: 400px) {
-			.box-left-content {
-				display: block;
-			}
-		}
 
 		.box-middle-content {
 			display: grid;
 			align-self: center;
 			font-size: 14px;
+			margin: 12px 0px;
 			.top-content {
 				display: flex;
-
-				.top-name,
-				.top-new,
-				.top-featured {
-					margin: 10px 4px;
-				}
 				.top-name {
+					overflow: hidden;
+					margin: auto 0px;
 					color: $headerBackground;
 					font-weight: 700;
 				}
@@ -84,7 +119,7 @@ body {
 					background-color: $headerBackground;
 					color: white;
 					margin: auto 5px;
-					padding: 5px 12px;
+					padding: 4px 8px;
 					border-radius: 30px;
 				}
 				.top-featured {
@@ -93,12 +128,13 @@ body {
 					background-color: black;
 					color: white;
 					margin: auto 5px;
-					padding: 5px 12px;
+					padding: 4px 10px;
 					border-radius: 30px;
 				}
 			}
 			.middle-content {
 				.position {
+					margin: 10px 0px;
 					font-size: 18px;
 					font-weight: 700;
 				}
@@ -115,7 +151,7 @@ body {
 					vertical-align: middle;
 				}
 				.days {
-					margin: 0px 5px;
+					margin: 0px 5px 0px 0px;
 				}
 				.location {
 					margin: 0px 5px;
