@@ -48,13 +48,13 @@ let array = [
 		skills: ['Frontend', 'junior', 'CSS', 'Javascript'],
 	},
 ];
-
 window.onload = function () {
 	var nodeid = document.getElementById('node-id');
-	array.map((e) => {
-		// console.log(e);
+	const currentarray = array.map((e) => {
+		//creating position-box div
 		var positionBox = document.createElement('div');
 		positionBox.setAttribute('class', 'position-box row');
+		// placing position-box inside node-id div
 		nodeid.appendChild(positionBox);
 		let positionCard = `
 				<div class="col-lg-1 box-left-content">
@@ -101,6 +101,15 @@ window.onload = function () {
 	});
 };
 
+// const found = array.skills.find((element) => element == 'Frontend');
+// console.log(found);
+// function finding(value) {
+// 	for (var i = 0; i < value.skills.length; i++) {
+// 		return vakue.skills[i] == 'Frontend';
+// 	}
+// }
+// const frontend = array.filter(findind);
+// console.log(frontend);
 //  toggling highlight of skill tags
 function highlightTagToggle(tagValue) {
 	if (
@@ -121,6 +130,12 @@ function highlightTagToggle(tagValue) {
 // executes when clicking skill tag
 // tagValue ==== Element that is clicked
 function filterTag(tagValue) {
+	var posBox = document.querySelectorAll('.position-box');
+	posBox.forEach((box) => {
+		box.style.display = 'none';
+	});
+	// posBox.style.display = 'none';
+	console.log(posBox);
 	// show filter-box div and its contents
 	var filterBox = document.getElementById('filter-box');
 	var filterTag = document.querySelector('.filter-tags');
@@ -141,6 +156,7 @@ function filterTag(tagValue) {
 	content.textContent = tagValue.textContent;
 
 	filter(tagValue);
+	filterme(tagValue);
 }
 
 function filter(value) {
@@ -153,7 +169,10 @@ function filter(value) {
 	allskills.forEach((skill) => {
 		var eachskillName = skill.innerHTML;
 		if (eachskillName == filteredTagName) {
-			console.log(skill.parentElement);
+			posBoxx = skill.parentElement.parentElement.parentElement;
+
+			posBoxx.style.display = 'flex';
+			console.log(skill.parentElement.parentElement.parentElement);
 			// same tag name is highlited
 			highlightTagToggle(skill);
 		}
@@ -175,17 +194,21 @@ function removeTag(val) {
 	});
 }
 
-// function filter(value) {
-// 	// console.log(value);
-// 	var filterValue = value.textContent;
-// 	array.map((i, index) => {
-// 		// console.log(filterValue);
-// 		console.log(i);
-// 		for (skill of i.skills) {
-// 			if (filterValue == skill) {
-// 				console.log(index);
-// 				console.log('present in array');
-// 			}
-// 		}
-// 	});
-// }
+function filterme(value) {
+	// console.log(value);
+	var filterValue = value.textContent;
+	array.map((i, index) => {
+		// console.log(filterValue);
+		console.log(i);
+		for (skill of i.skills) {
+			if (filterValue == skill) {
+				// var posBox = document.querySelectorAll('.position-box');
+				// posBox.forEach((box) => {
+				// 	box.style.display = 'block';
+				// });
+				console.log(index);
+				console.log('present in array');
+			}
+		}
+	});
+}
