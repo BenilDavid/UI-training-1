@@ -7,7 +7,7 @@ body {
 .header {
   height: 150px;
   width: 100%;
-  background: url(images/bg-header-desktop.svg);
+  background: url(../images/bg-header-desktop.svg);
   background-color: #5da5a4;
 }
 
@@ -18,8 +18,8 @@ body {
   width: 100%;
   height: auto;
   background: white;
-  -webkit-box-shadow: 0px 3px 10px 2px #d9edee;
-          box-shadow: 0px 3px 10px 2px #d9edee;
+  -webkit-box-shadow: 0px 10px 15px -7px #d9edee;
+          box-shadow: 0px 10px 15px -7px #d9edee;
   display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -44,12 +44,13 @@ body {
 
 .container #filter-box .tag .rm-lnk {
   color: #fff;
+  font-weight: 600;
   background-color: #64babb;
   border-top-right-radius: 0.25em;
   border-bottom-right-radius: 0.25em;
   cursor: pointer;
   margin-left: -5px;
-  padding: 0.2em 0.3em 0.3em;
+  padding: 0.2em 0.5em 0.3em;
 }
 
 .container #filter-box .tag .rm-lnk:hover {
@@ -70,8 +71,8 @@ body {
   width: 100%;
   height: 160px;
   background: white;
-  -webkit-box-shadow: 1px 3px 20px 2px #d9edee;
-          box-shadow: 1px 3px 20px 2px #d9edee;
+  -webkit-box-shadow: 0px 10px 15px -7px #d9edee;
+          box-shadow: 0px 10px 15px -7px #d9edee;
 }
 
 .container .position-box .box-left-content {
