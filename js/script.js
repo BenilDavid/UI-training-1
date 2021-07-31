@@ -47,10 +47,85 @@ let array = [
 		workLocation: 'USA only',
 		skills: ['Frontend', 'junior', 'CSS', 'Javascript'],
 	},
+	{
+		id: 5,
+		imageSource: 'images/loop-studios.svg',
+		name: 'LoopStudios',
+		newTag: false,
+		featuredTag: false,
+		position: 'Software Engineer',
+		days: '1w ago',
+		workType: 'Full Time',
+		workLocation: 'Worldwide',
+		skills: ['Fullstack', 'Midweight', 'Ruby', 'Sass', 'Javascript'],
+	},
+	{
+		id: 6,
+		imageSource: 'images/faceit.svg',
+		name: 'FaceIt',
+		newTag: false,
+		featuredTag: false,
+		position: 'Junior Backend Developer',
+		days: '2w ago',
+		workType: 'Full Time',
+		workLocation: 'UK only',
+		skills: ['Backend', 'junior', 'Ruby', 'RoR'],
+	},
+	{
+		id: 7,
+		imageSource: 'images/shortly.svg',
+		name: 'Shortly',
+		newTag: false,
+		featuredTag: false,
+		position: 'Junior Developer',
+		days: '2w ago',
+		workType: 'Full Time',
+		workLocation: 'Worldwide',
+		skills: ['Frontend', 'junior', 'HTML', 'Sass', 'Javascript'],
+	},
+	{
+		id: 8,
+		imageSource: 'images/insure.svg',
+		name: 'Insure',
+		newTag: false,
+		featuredTag: false,
+		position: 'Junior Frontend Developer',
+		days: '2w ago',
+		workType: 'Full Time',
+		workLocation: 'USA only',
+		skills: ['Frontend', 'junior', 'Vue', 'Javascript', 'Sass'],
+	},
+	{
+		id: 9,
+		imageSource: 'images/eyecam-co.svg',
+		name: 'Eyecam Co.',
+		newTag: false,
+		featuredTag: false,
+		position: 'Full stack Engineer',
+		days: '3w ago',
+		workType: 'Full Time',
+		workLocation: 'Worldwide',
+		skills: ['Fullstack', 'Midweight', 'Javascript', 'Django', 'Python'],
+	},
+	{
+		id: 10,
+		imageSource: 'images/the-air-filter-company.svg',
+		name: 'The Air Filter Company',
+		newTag: false,
+		featuredTag: false,
+		position: 'Frontend Dev',
+		days: '1mon ago',
+		workType: 'PartTime',
+		workLocation: 'Worldwide',
+		skills: ['Frontend', 'junior', 'React', 'Sass', 'Javascript'],
+	},
 ];
 window.onload = function () {
+	renderBoxes(array);
+};
+function renderBoxes(arr) {
 	var nodeid = document.getElementById('node-id');
-	const currentarray = array.map((e) => {
+	arr.map((e) => {
 		//creating position-box div
 		var positionBox = document.createElement('div');
 		positionBox.setAttribute('class', 'position-box row');
@@ -87,29 +162,109 @@ window.onload = function () {
 				</div>
 				<div class="col-lg-7 box-right-content">
 					<div class="skills">
-                    ${e.skills
-											.map(
-												(i) =>
-													"<div onclick='filterTag(this)' class='skill'>" +
-													i +
-													'</div>'
-											)
-											.join(' ')}						
+						${e.skills
+							.map(
+								(i) =>
+									"<div onclick='filterTag(this)' class='skill'>" + i + '</div>'
+							)
+							.join(' ')}						
 					</div>
 				</div>`;
 		positionBox.innerHTML = positionCard;
 	});
-};
+}
 
-// const found = array.skills.find((element) => element == 'Frontend');
-// console.log(found);
-// function finding(value) {
-// 	for (var i = 0; i < value.skills.length; i++) {
-// 		return vakue.skills[i] == 'Frontend';
-// 	}
-// }
-// const frontend = array.filter(findind);
-// console.log(frontend);
+// this array contains all objects that is filtered(POSITION BOX)
+var filteredTags = [];
+// this array contains all skills that are selected
+var selectedTagNameList = [];
+
+// executes when clicking skill tag, tagValue = skill that is clicked
+function filterTag(tagValue) {
+	// ------------ hiding all position boxes -------------
+	var posBox = document.querySelectorAll('.position-box');
+	posBox.forEach((box) => {
+		box.style.display = 'none';
+	});
+	// -----------------------------------------
+	// check if skill is clicked again
+	// selectedTagNameList.forEach((tagName) => {
+	// 	console.log(tagName);
+	// 	console.log('--------------clicked again-----------------');
+	// 	if (tagValue.textContent === tagName) {
+	// 		// console.log(tagValue);
+	// 		// tagValue.style.backgroundColor == '#f0fafb';
+	// 		// tagValue.style.color = '#64babb';
+	// 		// clickedAgain(tagValue);
+	// 		// filter(tagValue);
+	// 		// highlightTagToggle(tagValue);
+	// 	}
+	// 	console.log('--------------clicked again-----------------');
+	// });
+
+	// show filter Box
+	showFilterBox(tagValue);
+	// filters the position boxes
+	filterByTagName(tagValue);
+	selectedTagNameList.push(tagValue.textContent);
+	// highlights all tags that have same tagname
+	highlight(tagValue);
+	// highlightTagToggle(tagValue);
+}
+
+function removeusingSet(arr) {
+	let outputArray = Array.from(new Set(arr));
+	return outputArray;
+}
+
+// remove from filter box
+function removeTag(val) {
+	val.parentElement.style.display = 'none';
+	removedTagName = val.parentElement.textContent;
+	// console.log(removedTagName);
+	var allskills = document.querySelectorAll('.skill');
+	for (var i = 0; i < allskills.length; i++) {
+		if (allskills[i].textContent === removedTagName) {
+			console.log(allskills[i]);
+			allskills[i].style.background == '#f0fafb';
+			allskills[i].style.color = '#64babb';
+		}
+	}
+	// allskills.forEach((skill) => {
+	// 	// console.log(skill);
+	// 	if (removedTagName === skill.innerHTML) {
+	// 		console.log(skill);
+	// 		skill.style.backgroundColor == '#f0fafb';
+	// 		skill.style.color = '#64babb';
+	// 		// highlightTagToggle(skill);
+	// 	}
+	// });
+}
+
+function highlight(value) {
+	// console.log('------------------------------------');
+	filteredTagName = value.textContent;
+	var allskills = document.querySelectorAll('.skill');
+	selectedTagNameList.forEach((selectedTagName) => {
+		for (var i = 0; i < allskills.length; i++) {
+			if (allskills[i].textContent === selectedTagName) {
+				allskills[i].style.backgroundColor = '#64babb';
+				allskills[i].style.color = '#fff';
+			}
+		}
+		// allskills.forEach((skill) => {
+		// 	if (selectedTagName == skill.innerHTML) {
+		// 		// same tag name is highlited
+		// 		skill.style.backgroundColor = '#64babb';
+		// 		skill.style.color = '#fff';
+		// 		// highlightTagToggle(skill);
+		// 	}
+		// });
+	});
+	// console.log('------------------------------------');
+}
+
+// function clickedAgain(tagValue) {}
 //  toggling highlight of skill tags
 function highlightTagToggle(tagValue) {
 	if (
@@ -127,18 +282,11 @@ function highlightTagToggle(tagValue) {
 	}
 }
 
-// executes when clicking skill tag
-// tagValue ==== Element that is clicked
-function filterTag(tagValue) {
-	var posBox = document.querySelectorAll('.position-box');
-	posBox.forEach((box) => {
-		box.style.display = 'none';
-	});
-	// posBox.style.display = 'none';
-	console.log(posBox);
-	// show filter-box div and its contents
+// show filter-box div and its contents
+function showFilterBox(tagValue) {
 	var filterBox = document.getElementById('filter-box');
-	var filterTag = document.querySelector('.filter-tags');
+	var filterTags = document.querySelector('.filter-tags');
+
 	var tag = document.createElement('span');
 	var content = document.createElement('span');
 	var rmLink = document.createElement('span');
@@ -147,68 +295,39 @@ function filterTag(tagValue) {
 	content.setAttribute('class', 'content');
 	rmLink.setAttribute('class', 'rm-lnk');
 	rmLink.setAttribute('onclick', 'removeTag(this)');
-	removeSvg.setAttribute('src', '../images/icon-remove.svg');
-	filterTag.appendChild(tag);
+	removeSvg.setAttribute('src', './images/icon-remove.svg');
+	filterTags.appendChild(tag);
 	tag.appendChild(content);
 	rmLink.appendChild(removeSvg);
 	tag.appendChild(rmLink);
 	filterBox.style.display = 'grid';
 	content.textContent = tagValue.textContent;
-
-	filter(tagValue);
-	filterme(tagValue);
 }
 
-function filter(value) {
-	console.log('filtering');
-	filteredTagName = value.textContent;
-	console.log(filteredTagName);
-	var allskills = document.querySelectorAll('.skill');
-
-	// selecting all skill element that has same tag name
-	allskills.forEach((skill) => {
-		var eachskillName = skill.innerHTML;
-		if (eachskillName == filteredTagName) {
-			posBoxx = skill.parentElement.parentElement.parentElement;
-
-			posBoxx.style.display = 'flex';
-			console.log(skill.parentElement.parentElement.parentElement);
-			// same tag name is highlited
-			highlightTagToggle(skill);
-		}
-	});
-}
-
-function removeTag(val) {
-	console.log('remove clicked');
-	val.parentElement.style.display = 'none';
-	removedTag = val.parentElement.textContent;
-	var allskills = document.querySelectorAll('.skill');
-	allskills.forEach((skill) => {
-		// console.log(removedTag);
-		var eachskill = skill.innerHTML;
-		if (eachskill == removedTag) {
-			console.log(skill);
-			highlightTagToggle(skill);
-		}
-	});
-}
-
-function filterme(value) {
-	// console.log(value);
-	var filterValue = value.textContent;
-	array.map((i, index) => {
-		// console.log(filterValue);
-		console.log(i);
-		for (skill of i.skills) {
-			if (filterValue == skill) {
-				// var posBox = document.querySelectorAll('.position-box');
-				// posBox.forEach((box) => {
-				// 	box.style.display = 'block';
-				// });
-				console.log(index);
-				console.log('present in array');
+function filterByTagName(tagValue) {
+	const tempArray = [];
+	if (filteredTags.length > 0) {
+		filteredTags.map((s) => {
+			for (skill of s.skills) {
+				if (tagValue.textContent === skill) {
+					tempArray.push(s);
+					// console.log(s);
+				}
 			}
-		}
-	});
+		});
+	} else {
+		array.map((s) => {
+			for (skill of s.skills) {
+				if (tagValue.textContent === skill) {
+					tempArray.push(s);
+					// console.log(s);
+				}
+			}
+		});
+	}
+	filteredTags = tempArray;
+	// console.log(filteredTags);
+	var filteredDuplicateRemoved = removeusingSet(filteredTags);
+	renderBoxes(filteredDuplicateRemoved);
+	// console.log('filteredDuplicateRemoved', filteredDuplicateRemoved);
 }
