@@ -174,71 +174,187 @@ function renderBoxes(arr) {
 	});
 }
 
+function clearme() {
+	renderBoxes(array);
+	// remove tag from filter box when clicked again
+	const rmTag = document.querySelectorAll('.content');
+	for (var i = 0; i < rmTag.length; i++) {
+		rmTag[i].parentElement.style.display = 'none';
+		console.log(rmTag[i].parentElement);
+	}
+	var allskills = document.querySelectorAll('.skill');
+	for (var i = 0; i < allskills.length; i++) {
+		// highlightTagToggle(allskills[i]);
+		// console.log(allskills[i]);
+		allskills[i].style.backgroundColor = '#f0fafb';
+		allskills[i].style.color = '#64babb';
+	}
+}
 // this array contains all objects that is filtered(POSITION BOX)
 var filteredTags = [];
 // this array contains all skills that are selected
 var selectedTagNameList = [];
-
 // executes when clicking skill tag, tagValue = skill that is clicked
 function filterTag(tagValue) {
+	selectedTagNameList.push(tagValue.textContent);
+
 	// ------------ hiding all position boxes -------------
 	var posBox = document.querySelectorAll('.position-box');
 	posBox.forEach((box) => {
 		box.style.display = 'none';
 	});
 	// -----------------------------------------
-	// check if skill is clicked again
-	// selectedTagNameList.forEach((tagName) => {
-	// 	console.log(tagName);
-	// 	console.log('--------------clicked again-----------------');
-	// 	if (tagValue.textContent === tagName) {
-	// 		// console.log(tagValue);
-	// 		// tagValue.style.backgroundColor == '#f0fafb';
-	// 		// tagValue.style.color = '#64babb';
-	// 		// clickedAgain(tagValue);
-	// 		// filter(tagValue);
-	// 		// highlightTagToggle(tagValue);
-	// 	}
-	// 	console.log('--------------clicked again-----------------');
-	// });
-
+	console.log(tagValue);
 	// show filter Box
 	showFilterBox(tagValue);
 	// filters the position boxes
 	filterByTagName(tagValue);
-	selectedTagNameList.push(tagValue.textContent);
 	// highlights all tags that have same tagname
 	highlight(tagValue);
 	// highlightTagToggle(tagValue);
+
+	// check if skill is clicked again
+	count = 0;
+	selectedTagNameList.forEach((tagName) => {
+		// console.log(tagName);
+		console.log('--------------clicked again-----------------');
+		if (tagValue.textContent === tagName) {
+			count++;
+			console.log(count);
+			// click is even
+			if (count % 2 == 0) {
+				removeWhenClickedAgain(tagName);
+			} else {
+				// click is odd
+				// highlights all tags that have same tagname
+				highlight(tagValue);
+			}
+		}
+		console.log('-------------- clicked again end -----------------');
+	});
 }
 
-function removeusingSet(arr) {
-	let outputArray = Array.from(new Set(arr));
-	return outputArray;
+function removeWhenClickedAgain(nameOfTag) {
+	var posBox = document.querySelectorAll('.position-box');
+	posBox.forEach((box) => {
+		box.style.display = 'none';
+	});
+	// remove tag from filter box when clicked again
+	const rmTag = document.querySelectorAll('.content');
+	for (var i = 0; i < rmTag.length; i++) {
+		if (rmTag[i].textContent === nameOfTag) {
+			rmTag[i].parentElement.style.display = 'none';
+			console.log(rmTag[i].parentElement);
+		}
+	}
+	// unhighlight tags in position boxes that is removed
+	if (selectedTagNameList.length > 0) {
+		var allskills = document.querySelectorAll('.skill');
+		selectedTagNameList.forEach((selectedTagName) => {
+			for (var i = 0; i < allskills.length; i++) {
+				if (allskills[i].textContent === selectedTagName) {
+					// highlightTagToggle(allskills[i]);
+					// console.log(allskills[i]);
+					allskills[i].style.backgroundColor = '#f0fafb';
+					allskills[i].style.color = '#64babb';
+				}
+			}
+		});
+	}
+
+	// array without name that is clicked again
+	const filtr = selectedTagNameList.filter((filter) => {
+		return filter != nameOfTag;
+	});
+	console.log(filtr);
+	if (filtr.length < 1) {
+		renderBoxes(array);
+	} else {
+		var afterRemovedArray = [];
+		array.map((f) => {
+			var count = 0;
+			for (skill of f.skills) {
+				for (i = 0; i < filtr.length; i++) {
+					if (filtr[i] === skill) {
+						count = count + 1;
+						if (count === filtr.length) {
+							afterRemovedArray.push(f);
+						}
+					}
+				}
+			}
+		});
+		renderBoxes(afterRemovedArray);
+		console.log(afterRemovedArray);
+		selectedTagNameList = filtr;
+
+		var allskills = document.querySelectorAll('.skill');
+		filtr.forEach((selectedTagName) => {
+			for (var i = 0; i < allskills.length; i++) {
+				if (allskills[i].textContent === selectedTagName) {
+					// highlightTagToggle(allskills[i]);
+					// console.log(allskills[i]);
+					allskills[i].style.backgroundColor = '#64babb';
+					allskills[i].style.color = '#fff';
+				}
+			}
+		});
+	}
 }
 
 // remove from filter box
 function removeTag(val) {
+	// hiding all position boxes
+	var posBox = document.querySelectorAll('.position-box');
+	posBox.forEach((box) => {
+		box.style.display = 'none';
+	});
+
+	// remove tag from filter box
 	val.parentElement.style.display = 'none';
 	removedTagName = val.parentElement.textContent;
-	// console.log(removedTagName);
-	var allskills = document.querySelectorAll('.skill');
-	for (var i = 0; i < allskills.length; i++) {
-		if (allskills[i].textContent === removedTagName) {
-			console.log(allskills[i]);
-			allskills[i].style.background == '#f0fafb';
-			allskills[i].style.color = '#64babb';
+
+	// splice the specific array element that is removed from selectedTagNameList
+	for (var i = 0; i < selectedTagNameList.length; i++) {
+		console.log(selectedTagNameList[i]);
+		if (selectedTagNameList[i] === removedTagName) {
+			console.log(selectedTagNameList[i]);
+			selectedTagNameList.splice(i, 1);
 		}
 	}
-	// allskills.forEach((skill) => {
-	// 	// console.log(skill);
-	// 	if (removedTagName === skill.innerHTML) {
-	// 		console.log(skill);
-	// 		skill.style.backgroundColor == '#f0fafb';
-	// 		skill.style.color = '#64babb';
-	// 		// highlightTagToggle(skill);
-	// 	}
-	// });
+
+	// filter array after removing array of object without removed tag name
+	var afterRemovedArray = [];
+	array.map((f) => {
+		var count = 0;
+		for (skill of f.skills) {
+			for (i = 0; i < selectedTagNameList.length; i++) {
+				if (selectedTagNameList[i] === skill) {
+					count = count + 1;
+					if (count === selectedTagNameList.length) {
+						afterRemovedArray.push(f);
+					}
+				}
+			}
+		}
+	});
+	renderBoxes(afterRemovedArray);
+	// console.log(afterRemovedArray);
+
+	// unhighlight tags in position boxes that is removed
+	if (selectedTagNameList.length > 0) {
+		var allskills = document.querySelectorAll('.skill');
+		selectedTagNameList.forEach((selectedTagName) => {
+			for (var i = 0; i < allskills.length; i++) {
+				if (allskills[i].textContent === selectedTagName) {
+					highlightTagToggle(allskills[i]);
+				}
+			}
+		});
+	}
+	if (selectedTagNameList.length === 0) {
+		renderBoxes(array);
+	}
 }
 
 function highlight(value) {
@@ -248,18 +364,12 @@ function highlight(value) {
 	selectedTagNameList.forEach((selectedTagName) => {
 		for (var i = 0; i < allskills.length; i++) {
 			if (allskills[i].textContent === selectedTagName) {
-				allskills[i].style.backgroundColor = '#64babb';
-				allskills[i].style.color = '#fff';
+				// allskills[i].style.backgroundColor = '#64babb';
+				// allskills[i].style.color = '#fff';
+				// console.log(allskills[i]);
+				highlightTagToggle(allskills[i]);
 			}
 		}
-		// allskills.forEach((skill) => {
-		// 	if (selectedTagName == skill.innerHTML) {
-		// 		// same tag name is highlited
-		// 		skill.style.backgroundColor = '#64babb';
-		// 		skill.style.color = '#fff';
-		// 		// highlightTagToggle(skill);
-		// 	}
-		// });
 	});
 	// console.log('------------------------------------');
 }
@@ -281,9 +391,27 @@ function highlightTagToggle(tagValue) {
 		tagValue.style.color = '#fff';
 	}
 }
-
+filterboxTags = [];
 // show filter-box div and its contents
 function showFilterBox(tagValue) {
+	// var filterBox = document.getElementById('filter-box');
+	// var filterTags = document.querySelector('.filter-tags');
+	// filterBox.style.display = 'grid';
+	// filterboxTags = selectedTagNameList;
+	// var duplicateNameRemoved = removeusingSet(selectedTagNameList);
+	// duplicateNameRemoved.forEach((tagname) => {
+	// 	console.log(tagname);
+	// 	var tag = document.createElement('span');
+	// 	tag.setAttribute('class', 'tag');
+	// 	const filtertag = `
+	// 						<span class="content">${tagValue.textContent}</span>
+	// 						<span class="rm-lnk" onclick="removeTag(this)">
+	// 						<img src="./images/icon-remove.svg">
+	// 						</span>`;
+	// 	tag.innerHTML = filtertag;
+	// 	filterTags.appendChild(tag);
+	// });
+
 	var filterBox = document.getElementById('filter-box');
 	var filterTags = document.querySelector('.filter-tags');
 
@@ -304,23 +432,28 @@ function showFilterBox(tagValue) {
 	content.textContent = tagValue.textContent;
 }
 
+// remove duplicate array elements
+function removeusingSet(arr) {
+	let outputArray = Array.from(new Set(arr));
+	return outputArray;
+}
+
+// filtering array based on selected tag name
 function filterByTagName(tagValue) {
 	const tempArray = [];
 	if (filteredTags.length > 0) {
-		filteredTags.map((s) => {
-			for (skill of s.skills) {
+		filteredTags.map((a) => {
+			for (skill of a.skills) {
 				if (tagValue.textContent === skill) {
-					tempArray.push(s);
-					// console.log(s);
+					tempArray.push(a);
 				}
 			}
 		});
 	} else {
-		array.map((s) => {
-			for (skill of s.skills) {
+		array.map((a) => {
+			for (skill of a.skills) {
 				if (tagValue.textContent === skill) {
-					tempArray.push(s);
-					// console.log(s);
+					tempArray.push(a);
 				}
 			}
 		});
