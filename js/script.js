@@ -479,6 +479,7 @@ function filterByTagName(tagValue) {
 }
 
 function clearme() {
+	selectedTagNameList = [];
 	// show all position boxes
 	var posBox = document.querySelectorAll('.position-box');
 	posBox.forEach((box) => {
@@ -486,12 +487,14 @@ function clearme() {
 	});
 	renderBoxes(array);
 
-	// remove all tag from filter box
+	// remove filter box
 	const rmTag = document.querySelectorAll('.content');
+	const filterbox = document.querySelector('#filter-box');
 	for (var i = 0; i < rmTag.length; i++) {
 		rmTag[i].parentElement.style.display = 'none';
 		console.log(rmTag[i].parentElement);
 	}
+	filterbox.style.display = 'none';
 
 	//unhighlight all skill tabs
 	var allskills = document.querySelectorAll('.skill');
