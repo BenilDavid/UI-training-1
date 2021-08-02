@@ -24,13 +24,13 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-grid-columns: 1fr 80px;
-      grid-template-columns: 1fr 80px;
+  -ms-grid-columns: 1fr 50px;
+      grid-template-columns: 1fr 50px;
 }
 
 .container #filter-box .tag {
-  display: inline;
-  margin: 0px 10px;
+  margin: 10px 10px;
+  display: inline-block;
 }
 
 .container #filter-box .tag .content {
@@ -50,7 +50,7 @@ body {
   border-bottom-right-radius: 0.25em;
   cursor: pointer;
   margin-left: -5px;
-  padding: 0.2em 0.5em 0.3em;
+  padding: 0.2em 0.6em 0.3em;
 }
 
 .container #filter-box .tag .rm-lnk:hover {
