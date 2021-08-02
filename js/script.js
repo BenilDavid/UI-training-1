@@ -174,22 +174,6 @@ function renderBoxes(arr) {
 	});
 }
 
-function clearme() {
-	renderBoxes(array);
-	// remove tag from filter box when clicked again
-	const rmTag = document.querySelectorAll('.content');
-	for (var i = 0; i < rmTag.length; i++) {
-		rmTag[i].parentElement.style.display = 'none';
-		console.log(rmTag[i].parentElement);
-	}
-	var allskills = document.querySelectorAll('.skill');
-	for (var i = 0; i < allskills.length; i++) {
-		// highlightTagToggle(allskills[i]);
-		// console.log(allskills[i]);
-		allskills[i].style.backgroundColor = '#f0fafb';
-		allskills[i].style.color = '#64babb';
-	}
-}
 // this array contains all objects that is filtered(POSITION BOX)
 var filteredTags = [];
 // this array contains all skills that are selected
@@ -204,57 +188,68 @@ function filterTag(tagValue) {
 		box.style.display = 'none';
 	});
 	// -----------------------------------------
-	console.log(tagValue);
 	// show filter Box
 	showFilterBox(tagValue);
-	// filters the position boxes
-	filterByTagName(tagValue);
-	// highlights all tags that have same tagname
-	highlight(tagValue);
-	// highlightTagToggle(tagValue);
-
 	// check if skill is clicked again
 	count = 0;
-	selectedTagNameList.forEach((tagName) => {
-		// console.log(tagName);
-		console.log('--------------clicked again-----------------');
-		if (tagValue.textContent === tagName) {
+	for (var i = 0; i < selectedTagNameList.length; i++) {
+		if (tagValue.textContent === selectedTagNameList[i]) {
 			count++;
 			console.log(count);
-			// click is even
-			if (count % 2 == 0) {
-				removeWhenClickedAgain(tagName);
-			} else {
-				// click is odd
-				// highlights all tags that have same tagname
-				highlight(tagValue);
-			}
 		}
-		console.log('-------------- clicked again end -----------------');
-	});
+		// click is even
+	}
+	if (count % 2 == 0) {
+		removeWhenClickedAgain(tagValue.textContent);
+	} else {
+		// filters the position boxes
+		filterByTagName(tagValue);
+		// highlights all tags that have same tagname
+		highlight(tagValue);
+	}
+	// selectedTagNameList.forEach((tagName) => {
+	// 	// console.log(tagName);
+	// 	console.log('--------------clicked again-----------------');
+	// 	if (tagValue.textContent === tagName) {
+	// 		count++;
+	// 		console.log(count);
+	// 	}
+	// 	console.log('--------- clicked again end ---------');
+	// });
+	// // click is even
+	// if (count % 2 == 0) {
+	// 	removeWhenClickedAgain(tagName);
+	// } else {
+	// 	// click is odd
+	// 	// highlights all tags that have same tagname
+	// 	highlight(tagValue);
+	// }
 }
 
+// same tag clicked again
 function removeWhenClickedAgain(nameOfTag) {
+	console.log('clicked even time');
+	// all position box are hidden
 	var posBox = document.querySelectorAll('.position-box');
 	posBox.forEach((box) => {
 		box.style.display = 'none';
 	});
-	// remove tag from filter box when clicked again
+
+	// remove tag from filter box
 	const rmTag = document.querySelectorAll('.content');
 	for (var i = 0; i < rmTag.length; i++) {
 		if (rmTag[i].textContent === nameOfTag) {
 			rmTag[i].parentElement.style.display = 'none';
-			console.log(rmTag[i].parentElement);
+			// console.log(rmTag[i].parentElement);
 		}
 	}
-	// unhighlight tags in position boxes that is removed
+
+	// unhighlight tags in position boxes
 	if (selectedTagNameList.length > 0) {
 		var allskills = document.querySelectorAll('.skill');
 		selectedTagNameList.forEach((selectedTagName) => {
 			for (var i = 0; i < allskills.length; i++) {
 				if (allskills[i].textContent === selectedTagName) {
-					// highlightTagToggle(allskills[i]);
-					// console.log(allskills[i]);
 					allskills[i].style.backgroundColor = '#f0fafb';
 					allskills[i].style.color = '#64babb';
 				}
@@ -269,7 +264,9 @@ function removeWhenClickedAgain(nameOfTag) {
 	console.log(filtr);
 	if (filtr.length < 1) {
 		renderBoxes(array);
+		selectedTagNameList = [];
 	} else {
+		// if all names in filtr is present in a array, that array is stored in afterRemovedArray
 		var afterRemovedArray = [];
 		array.map((f) => {
 			var count = 0;
@@ -287,13 +284,13 @@ function removeWhenClickedAgain(nameOfTag) {
 		renderBoxes(afterRemovedArray);
 		console.log(afterRemovedArray);
 		selectedTagNameList = filtr;
+		console.log(selectedTagNameList);
 
+		// highlight all tags in filtr array
 		var allskills = document.querySelectorAll('.skill');
 		filtr.forEach((selectedTagName) => {
 			for (var i = 0; i < allskills.length; i++) {
 				if (allskills[i].textContent === selectedTagName) {
-					// highlightTagToggle(allskills[i]);
-					// console.log(allskills[i]);
 					allskills[i].style.backgroundColor = '#64babb';
 					allskills[i].style.color = '#fff';
 				}
@@ -440,27 +437,66 @@ function removeusingSet(arr) {
 
 // filtering array based on selected tag name
 function filterByTagName(tagValue) {
-	const tempArray = [];
-	if (filteredTags.length > 0) {
-		filteredTags.map((a) => {
-			for (skill of a.skills) {
-				if (tagValue.textContent === skill) {
-					tempArray.push(a);
+	var afterRemovedArray = [];
+	array.map((f) => {
+		var count = 0;
+		for (skill of f.skills) {
+			for (i = 0; i < selectedTagNameList.length; i++) {
+				if (selectedTagNameList[i] === skill) {
+					count = count + 1;
+					if (count === selectedTagNameList.length) {
+						afterRemovedArray.push(f);
+					}
 				}
 			}
-		});
-	} else {
-		array.map((a) => {
-			for (skill of a.skills) {
-				if (tagValue.textContent === skill) {
-					tempArray.push(a);
-				}
-			}
-		});
+		}
+	});
+	renderBoxes(afterRemovedArray);
+
+	// const tempArray = [];
+	// if (filteredTags.length > 0) {
+	// 	filteredTags.map((a) => {
+	// 		for (skill of a.skills) {
+	// 			if (tagValue.textContent === skill) {
+	// 				tempArray.push(a);
+	// 			}
+	// 		}
+	// 	});
+	// } else {
+	// 	array.map((a) => {
+	// 		for (skill of a.skills) {
+	// 			if (tagValue.textContent === skill) {
+	// 				tempArray.push(a);
+	// 			}
+	// 		}
+	// 	});
+	// }
+	// filteredTags = tempArray;
+	// // console.log(filteredTags);
+	// var filteredDuplicateRemoved = removeusingSet(filteredTags);
+	// renderBoxes(filteredDuplicateRemoved);
+	// // console.log('filteredDuplicateRemoved', filteredDuplicateRemoved);
+}
+
+function clearme() {
+	// show all position boxes
+	var posBox = document.querySelectorAll('.position-box');
+	posBox.forEach((box) => {
+		box.style.display = 'none';
+	});
+	renderBoxes(array);
+
+	// remove all tag from filter box
+	const rmTag = document.querySelectorAll('.content');
+	for (var i = 0; i < rmTag.length; i++) {
+		rmTag[i].parentElement.style.display = 'none';
+		console.log(rmTag[i].parentElement);
 	}
-	filteredTags = tempArray;
-	// console.log(filteredTags);
-	var filteredDuplicateRemoved = removeusingSet(filteredTags);
-	renderBoxes(filteredDuplicateRemoved);
-	// console.log('filteredDuplicateRemoved', filteredDuplicateRemoved);
+
+	//unhighlight all skill tabs
+	var allskills = document.querySelectorAll('.skill');
+	for (var i = 0; i < allskills.length; i++) {
+		allskills[i].style.backgroundColor = '#f0fafb';
+		allskills[i].style.color = '#64babb';
+	}
 }
